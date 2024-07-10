@@ -35,6 +35,10 @@ import Ejercicios.models.Celda;
 public class Laberinto {
 
     public List<Celda> getPath(boolean[][] grid) {
-        throw new UnsupportedOperationException("No implementado aún");
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid.length; j++) {
+                
+            }
+        }
     }
 }
