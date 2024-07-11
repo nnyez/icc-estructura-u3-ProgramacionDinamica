@@ -4,6 +4,22 @@ public class Celda {
     int row; // Fila de la celda
     int col; // Columna de la celda
 
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
+
     // Constructor que inicializa una celda con la fila y columna especificadas
     public Celda(int row, int col) {
         this.row = row;
@@ -36,4 +52,10 @@ public class Celda {
             return false; // Comparamos las columnas
         return true; // Si todas las comparaciones son iguales, los objetos son iguales
     }
+
+    @Override
+    public String toString() {
+        return "(" + row + "," + col + ")";
+    }
+
 }

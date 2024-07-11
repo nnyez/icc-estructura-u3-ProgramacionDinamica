@@ -1,6 +1,7 @@
 package Ejercicios.contorllers;
 
 import java.util.List;
+import java.util.*;
 
 import Ejercicios.models.Celda;
 
@@ -35,10 +36,37 @@ import Ejercicios.models.Celda;
 public class Laberinto {
 
     public List<Celda> getPath(boolean[][] grid) {
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid.length; j++) {
-                
-            }
+        List<Celda> list = new ArrayList<>();
+        if (grid == null || grid.length == 0 || grid[0].length == 0) {
+            return null;
         }
+        if (getPathCaching(grid, list, new HashMap<>(), new Celda(0, 0)))
+            return list;
+        return new ArrayList<>();
+
+    }
+
+    public boolean getPathCaching(boolean[][] grid, List<Celda> list, HashMap<Celda, Boolean> cache, Celda last) {
+        if (last.getRow() >= grid.length || last.getCol() >= grid[0].length
+                || !grid[last.getRow()][last.getCol()]) {
+            return false;
+        }
+        if (cache.containsKey(last)) {
+            return cache.get(last);
+        }
+
+        boolean isEnd = (last.getRow() == grid.length - 1 && last.getCol() == grid[0].length - 1);
+        boolean isTruePath = false;
+
+        if (isEnd || getPathCaching(grid, list, cache, new Celda(last.getRow() + 1, last.getCol()))
+                || getPathCaching(grid, list, cache, new Celda(last.getRow(), last.getCol() + 1))) {
+            list.add(last);
+            isTruePath = true;
+        }
+
+        cache.put(last, isTruePath);
+
+        return isTruePath;
+
     }
 }
